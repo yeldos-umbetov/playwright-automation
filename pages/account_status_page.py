@@ -5,9 +5,9 @@ class AccountStatusPage(BasePage):
     def __init__(self, page: Page):
         super().__init__(page)
 
-        self.account_created_header = page.get_by_text("Account created!", exact=True)
-        self.account_deleted_header = page.get_by_text("Account deleted!", exact=True)
-        self.continue_btn = page.get_by_role("button", name="Continue")
+        self.account_created_header = page.get_by_text("Account created!")
+        self.account_deleted_header = page.get_by_text("Account deleted!")
+        self.continue_btn = page.get_by_role("link", name="Continue")
 
     def verify_account_created_header(self) -> bool:
         return self.account_created_header.is_visible()
