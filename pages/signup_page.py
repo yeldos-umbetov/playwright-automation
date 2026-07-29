@@ -28,9 +28,6 @@ class SignupPage(BasePage):
 
         self.create_account_btn = page.get_by_role("button", name="Create Account")
 
-    def is_account_info_header_visible(self) -> bool:
-        return self.account_info_header.is_visible()
-
     def opt_in_marketing(self):
         self.newsletter_checkbox.check()
         self.offers_checkbox.check()
