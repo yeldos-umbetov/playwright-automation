@@ -1,6 +1,7 @@
 import pytest
 import time
 from playwright.sync_api import Page
+from playwright.sync_api import expect
 from pages.home_page import HomePage
 from pages.login_page import LoginPage
 from pages.signup_page import SignupPage
@@ -25,11 +26,12 @@ def test_register_user(page: Page):
     user_email = f"qa_engineer_{unique_timestamp}@testlabs.com"
 
     home_page.navigate_to("https://automationexercise.com")
-    assert home_page.is_page_visible(), "Failure: Homepage canvas is not visible"
+    expect(home_page.slider_carousel).to_be_visible(timeout=5000)
+    expect(home_page.features_items_header).to_be_visible(timeout=5000)
     home_page.click_login_signup()
-    assert login_page.is_signup_header_visible(), "Failure: Login page is not visible"
+    expect(login_page.signup_header).to_be_visible(timeout=5000)
     login_page.submit_initial_signup(name=username, email=user_email)
-    assert signup_page.is_account_info_header_visible(), "Failure: Signup page is not visible"
+    expect(signup_page.account_info_header).to_be_visible(timeout=5000)
     signup_page.fill_account_details(password="SecurePass123!", day="15", month="5", year="1995")
     signup_page.opt_in_marketing()
     address_payload = {
