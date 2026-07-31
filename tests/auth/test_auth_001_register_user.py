@@ -6,6 +6,7 @@ from pages.home_page import HomePage
 from pages.login_page import LoginPage
 from pages.signup_page import SignupPage
 from pages.account_status_page import AccountStatusPage
+from utils.data_models import AddressData
 
 """
 Jira ticket QA-101
@@ -13,7 +14,7 @@ scenario description: signing up a user by entering all the necessary informatio
 """
 
 @pytest.mark.jira("QA-101")
-def test_register_user(page: Page):
+def test_register_user(page: Page, random_address: AddressData):
     # initializing page objects
     home_page = HomePage(page)
     login_page = LoginPage(page)
@@ -34,19 +35,7 @@ def test_register_user(page: Page):
     expect(signup_page.account_info_header).to_be_visible(timeout=5000)
     signup_page.fill_account_details(password="SecurePass123!", day="15", month="5", year="1995")
     signup_page.opt_in_marketing()
-    address_payload = {
-        "first_name": "Jameson",
-        "last_name": "Taylor",
-        "company": "BI Group",
-        "address1": "Mangilik El av. 56",
-        "address2": "block c3.5",
-        "country": "United States",
-        "state": "Astana City",
-        "city": "Astana",
-        "zipcode": "010000",
-        "mobile": "+77751124212"
-    }
-    signup_page.fill_address_details(address_payload)
+    signup_page.fill_address_details(random_address.to_dict())
     signup_page.click_create_account()
     assert status_page.verify_account_created_header(), "Failure: Account was not created"
     status_page.click_continue_btn()
