@@ -1,6 +1,7 @@
 import pytest
 import time
 from playwright.sync_api import Page
+from playwright.sync_api import expect
 from pages.home_page import HomePage
 from pages.login_page import LoginPage
 
@@ -15,4 +16,4 @@ def test_login_user(page: Page):
     login_page = LoginPage(page)
 
     home_page.navigate_to("https://automationexercise.com")
-    assert home_page.is_page_visible(), "Failure: home page is not visible"
+    expect(home_page.features_items_header).to_be_visible()
