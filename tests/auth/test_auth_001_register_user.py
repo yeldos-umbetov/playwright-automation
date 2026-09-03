@@ -37,10 +37,10 @@ def test_register_user(page: Page, random_address: AddressData):
     signup_page.opt_in_marketing()
     signup_page.fill_address_details(random_address.to_dict())
     signup_page.click_create_account()
-    assert status_page.verify_account_created_header(), "Failure: Account was not created"
+    expect(status_page.account_created_header).to_be_visible()
     status_page.click_continue_btn()
     assert f"Logged in as {username}" in home_page.get_logged_in_text(), "Failure: Signup was not successful"
     home_page.click_delete_account()
-    assert status_page.verify_account_deleted_header(), "Failure: Account was not deleted"
+    expect(status_page.account_deleted_header).to_be_visible()
     status_page.click_continue_btn()
 

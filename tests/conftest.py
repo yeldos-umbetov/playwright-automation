@@ -49,3 +49,7 @@ def registered_user(playwright: Playwright, random_address: AddressData) -> User
     yield user
     api_request_context.dispose()
 
+
+@pytest.fixture(scope="session", autouse=True)
+def configure_test_id_attribute(playwright: Playwright):
+    playwright.selectors.set_test_id_attribute("data-qa")
