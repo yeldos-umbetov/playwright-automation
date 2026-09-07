@@ -29,8 +29,8 @@ def registered_user(playwright: Playwright, random_address: AddressData) -> User
         "birth_date": "15",
         "birth_month": "Jan",
         "birth_year": "1997",
-        "first_name": random_address.first_name,
-        "last_name": random_address.last_name,
+        "firstname": random_address.first_name,
+        "lastname": random_address.last_name,
         "company": random_address.company,
         "address1": random_address.address1,
         "address2": random_address.address2,
@@ -43,12 +43,13 @@ def registered_user(playwright: Playwright, random_address: AddressData) -> User
 
     response = api_request_context.post(
         "https://automationexercise.com/api/createAccount",
-        data=payload
+        form=payload
     )
-    assert response.status == 201 or response.ok, f"failed to register user: {response.text}"
+    response_json = response.json()
+
+    assert response_json.get("responseCode") == 201, f"failed to register user: {response_json}"
     yield user
     api_request_context.dispose()
-
 
 @pytest.fixture(scope="session", autouse=True)
 def configure_test_id_attribute(playwright: Playwright):
