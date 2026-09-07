@@ -9,11 +9,5 @@ class AccountStatusPage(BasePage):
         self.account_deleted_header = page.get_by_text("Account deleted!")
         self.continue_btn = page.get_by_role("link", name="Continue")
 
-    def verify_account_created_header(self) -> bool:
-        return self.account_created_header.is_visible()
-
-    def verify_account_deleted_header(self) -> bool:
-        return self.account_deleted_header.is_visible()
-
     def click_continue_btn(self):
         self.continue_btn.click()
