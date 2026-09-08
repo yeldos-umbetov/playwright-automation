@@ -9,6 +9,7 @@ JIRA Ticket #103
 logging in with incorrect login and password
 """
 
+@pytest.mark.jira("QA-103")
 def test_login_with_incorrect_login_password(page: Page):
     home_page = HomePage(page)
     login_page = LoginPage(page)
