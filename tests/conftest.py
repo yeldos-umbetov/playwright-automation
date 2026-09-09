@@ -6,7 +6,7 @@ from utils.data_models import AddressData, UserData
 @pytest.fixture
 def home_page(page: Page) -> HomePage:
     home = HomePage(page)
-    home.navigate_to("https://automationexercise.com")
+    home.load()
     return home
 
 @pytest.fixture
