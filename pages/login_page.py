@@ -16,6 +16,8 @@ class LoginPage(BasePage):
         self.login_button = page.get_by_role("button", name = "Login")
 
         self.invalid_login_text = page.get_by_text("Your email or password is incorrect!")
+        self.invalid_signup_text = page.get_by_text("Email Address already exist!")
+
     def submit_initial_signup(self, name: str, email: str):
         self.signup_name_input.fill(name)
         self.signup_email_input.fill(email)

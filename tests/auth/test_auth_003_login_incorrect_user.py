@@ -14,7 +14,7 @@ def test_login_with_incorrect_login_password(page: Page):
     home_page = HomePage(page)
     login_page = LoginPage(page)
     invalid_user = UserData.generate()
-    home_page.navigate_to("https://automationexercise.com")
+    home_page.load()
     expect(home_page.slider_carousel).to_be_visible()
     home_page.click_login_signup()
     expect(login_page.login_header).to_be_visible()

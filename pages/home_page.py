@@ -25,3 +25,5 @@ class HomePage(BasePage):
     def click_logout(self):
         self.logout_link.click()
 
+    def load(self):
+        self.page.goto("/")

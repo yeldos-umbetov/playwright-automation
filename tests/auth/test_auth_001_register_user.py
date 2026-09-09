@@ -26,7 +26,7 @@ def test_register_user(page: Page, random_address: AddressData):
     username = f"AutomationUser_{unique_timestamp}"
     user_email = f"qa_engineer_{unique_timestamp}@testlabs.com"
 
-    home_page.navigate_to("https://automationexercise.com")
+    home_page.load()
     expect(home_page.slider_carousel).to_be_visible(timeout=5000)
     expect(home_page.features_items_header).to_be_visible(timeout=5000)
     home_page.click_login_signup()

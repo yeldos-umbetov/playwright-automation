@@ -14,7 +14,7 @@ def test_logout_user(page: Page, registered_user: UserData):
     home_page = HomePage(page)
     login_page = LoginPage(page)
 
-    home_page.navigate_to("https://automationexercise.com")
+    home_page.load()
     expect(home_page.features_items_header).to_be_visible()
     home_page.click_login_signup()
     login_page.login(registered_user.email, registered_user.password)
