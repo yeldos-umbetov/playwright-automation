@@ -11,6 +11,7 @@ class HomePage(BasePage):
         self.login_signup_link = page.get_by_role("link", name = "Signup / Login")
         self.delete_account_link = page.get_by_role("link", name = "Delete Account")
         self.logout_link = page.get_by_role("link", name = "Logout")
+        self.contact_us_link = page.get_by_role("link", name = "Contact Us")
         self.logged_in_text = page.locator("header .navbar-nav")
 
     def click_login_signup(self):
@@ -27,3 +28,6 @@ class HomePage(BasePage):
 
     def load(self):
         self.page.goto("/")
+
+    def click_contact_us_link(self):
+        self.contact_us_link.click()
