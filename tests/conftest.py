@@ -1,7 +1,8 @@
 import pytest
 from playwright.sync_api import Page, Playwright, APIRequestContext
 from pages.home_page import HomePage
-from utils.data_models import AddressData, UserData
+from utils.data_models import AddressData, UserData, ContactUsData
+from pathlib import Path
 
 @pytest.fixture
 def home_page(page: Page) -> HomePage:
@@ -54,3 +55,14 @@ def registered_user(playwright: Playwright, random_address: AddressData) -> User
 @pytest.fixture(scope="session", autouse=True)
 def configure_test_id_attribute(playwright: Playwright):
     playwright.selectors.set_test_id_attribute("data-qa")
+
+@pytest.fixture
+def contact_data() -> ContactUsData:
+    return ContactUsData.generate()
+
+@pytest.fixture
+def sample_upload_file(tmp_path: Path) -> Path:
+    """creates a sample upload file"""
+    file_path = tmp_path / "sample-upload.txt"
+    file_path.write_text("automation exercise test file")
+    return file_path

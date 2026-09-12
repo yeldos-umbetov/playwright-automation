@@ -56,3 +56,24 @@ class UserData:
 
     def to_dict(self) -> dict:
         return asdict(self)
+
+@dataclass
+class ContactUsData:
+    name: str
+    email: str
+    subject: str
+    message: str
+
+    @classmethod
+    def generate(cls, **overrides) -> "ContactUsData":
+        defaults = {
+            "name": fake.first_name(),
+            "email": fake.email(),
+            "subject": fake.sentence(nb_words=4),
+            "message": fake.paragraph(nb_sentences=5),
+        }
+        defaults.update(overrides)
+        return cls(**defaults)
+
+    def to_dict(self) -> dict:
+        return asdict(self)
