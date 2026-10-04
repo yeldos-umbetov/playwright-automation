@@ -1,8 +1,20 @@
+import re
 import pytest
 from playwright.sync_api import Page, Playwright, APIRequestContext
 from pages.home_page import HomePage
 from utils.data_models import AddressData, UserData, ContactUsData
 from pathlib import Path
+
+AD_PATTERNS = re.compile(
+    r"(googlesyndication|googleads|doubleclick|adservice|google-analytics|"
+    r"googletagmanager|googletag|facebook\.com/tr|analytics|pagead)"
+)
+
+@pytest.fixture(autouse=True)
+def block_ads(page: Page):
+    """Block ad network requests that can overlay page elements."""
+    page.route(AD_PATTERNS, lambda route: route.abort())
+    yield
 
 @pytest.fixture
 def home_page(page: Page) -> HomePage:

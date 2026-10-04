@@ -27,7 +27,7 @@ class HomePage(BasePage):
         self.logout_link.click()
 
     def load(self):
-        self.page.goto("/")
+        self.page.goto("/",wait_until="domcontentloaded")
 
     def click_contact_us_link(self):
         self.contact_us_link.click()

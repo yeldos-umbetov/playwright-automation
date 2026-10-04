@@ -13,9 +13,10 @@ class ContactUsPage(BasePage):
         self.subject_input = page.get_by_test_id("subject")
         self.message_input = page.get_by_test_id("message")
         self.upload_file_input = page.locator("input[name='upload_file']")
+        self.csrf_token = page.locator("#contact-us-form input[name='csrfmiddlewaretoken']")
         self.submit_btn = page.get_by_test_id("submit-button")
-        self.success_text = page.get_by_text("Success! Your details have been submitted successfully.")
-        self.home_link = page.get_by_role("link", name="Home")
+        self.success_text = page.locator(".status.alert-success")
+        self.home_link = page.locator(".btn-success")
 
     def fill_form(self, data: ContactUsData, file_path: str=None):
         self.name_input.fill(data.name)
